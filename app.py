@@ -11,11 +11,11 @@ def get_sentiment(text):
 	neu = analyser.polarity_scores(text)['neu']
 
 	if max(pos,neg,neu) == pos:
-		return "Positive"
+		return render_template('index.html', result = 'Positive')
 	elif max(pos,neg,neu) == neg:
-		return "Negative"
+		return render_template('index.html', result = 'Negative')
 	elif max(pos,neg,neu) == neu:
-		return "Neutral"
+		return render_template('index.html', result = 'Neutral')
 	
 	
 	
@@ -26,7 +26,7 @@ def index():
 		if details['form_type'] == 'get_sentiment':
 			return get_sentiment(details['sentence'])
 			
-	return render_template(r"index.html")
+	return render_template("index.html", result = '')
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0')
+	app.run(host = '0.0.0.0')
